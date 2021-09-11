@@ -7,6 +7,7 @@ import {
   Optional,
   OptionalFunctor,
   OptionalSemigroup,
+  OptionalMonad,
 } from "./Option.ts";
 import { Semigroup } from "./Semigroup.ts";
 import {
@@ -96,3 +97,51 @@ Deno.test("Can define semigroups over nested higher-order types", () => {
     assert(s.isSome() && s.value.isSome() && s.value.value);
   }
 });
+
+/**
+ * Optional Monad.
+ */
+const numbersUnderAddition: Semigroup<number> = {
+  sappend(one: number, two: number) {
+    return one + two;
+  },
+};
+
+const optionalMonadWithAddition = OptionalMonad(numbersUnderAddition);
+
+Deno.test("Monadic 'unit' should work for Optional", () => {
+  const opt12 = optionalMonadWithAddition.unit(12);
+  assertEquals(opt12.isSome() && opt12.value, 12);
+});
+
+Deno.test("Monadic 'bind' should work in the Some case", () => {
+  const opt15 = optionalMonadWithAddition.unit(15);
+  const opt25 = optionalMonadWithAddition.bind(opt15, (x) => Some.of(x + 10));
+  assertEquals(opt25.isSome() && opt25.value, 25);
+});
+
+Deno.test("Monadic 'bind' should work in the None case", () => {
+  // Test the monad's `bind` funciton in the None case.
+  const optNone = optionalMonadWithAddition.empty;
+  const optStillNone = optionalMonadWithAddition.bind(optNone, (x) =>
+    Some.of(x + 20)
+  );
+  assert(optStillNone.isNone());
+});
+
+Deno.test(
+  "Underlying Optional type should have chainable `bind` method which works in the Some case.",
+  () => {
+    // Test the underlying (and simpler) method of `bind`.
+    const opt26 = Some.of(15).bind((x) => Some.of(x + 11));
+    assertEquals(opt26.isSome() && opt26.value, 26);
+  }
+);
+
+Deno.test(
+  "Underlying Optional type should have `bind` method which works in the None case.",
+  () => {
+    const noneYetAgain = None.bind((x) => Some.of(x + 10));
+    assert(noneYetAgain.isNone());
+  }
+);
