@@ -1,5 +1,5 @@
 import { Functor1 } from "./Functor.ts";
-import { Semigroup0, Semigroup1 } from "./Semigroup.ts";
+import { Semigroup } from "./Semigroup.ts";
 
 const OptionalID = "Optional" as const;
 type OptionalID = typeof OptionalID;
@@ -62,9 +62,9 @@ class _OptionalFunctor implements Functor1<OptionalID> {
 }
 
 export function OptionalSemigroup<InnerType>(
-  semigroupForInnerType: Semigroup0<InnerType>
+  semigroupForInnerType: Semigroup<InnerType>
 ) {
-  class _OptionalSemigroup implements Semigroup1<OptionalID, InnerType> {
+  class _OptionalSemigroup implements Semigroup<Optional<InnerType>> {
     sappend(
       one: Optional<InnerType>,
       two: Optional<InnerType>
