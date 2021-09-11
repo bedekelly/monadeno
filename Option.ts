@@ -114,7 +114,7 @@ class _OptionalMonad<InnerType>
   // use different sorts of types. Monoid doesn't need higher-kinded types,
   // so it just uses regular ones; whereas Monad *does* need higher-kinded
   // types and so uses the nasty string hack.
-  implements Monad<OptionalID>, Monoid<Optional<InnerType>>
+  implements Monad<OptionalID, InnerType>, Monoid<Optional<InnerType>>
 {
   empty = None;
   unit<T>(t: T): Optional<T> {
