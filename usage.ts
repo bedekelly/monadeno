@@ -85,9 +85,7 @@ const AlternativeOptionalSemigroup: Semigroup<Optional<boolean>> = {
 };
 
 {
-  const { sappend } = OptionalSemigroup<Optional<boolean>>(
-    AlternativeOptionalSemigroup
-  );
+  const { sappend } = OptionalSemigroup(AlternativeOptionalSemigroup);
   const s = sappend(Some.of(Some.of(false)), Some.of(Some.of(true)));
   console.log(s.isSome() && s.value.isSome() && s.value.value);
 }
