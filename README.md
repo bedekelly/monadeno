@@ -15,11 +15,16 @@ fixing various problems that arose using Deno and strict tsconfig options.
 Run `deno test` in the directory; each file ending in `*.test.ts` will be automatically found and executed.
 ```
 $ deno test
-running 4 tests from file:///<snip>/monadeno/Option.test.ts
-test Processing an Optional type works as expected ... ok (6ms)
-test Can use explicit typeclass by importing OptionalFunctor ... ok (7ms)
-test Can define and use a semigroup over Optional types ... ok (6ms)
-test Can define semigroups over nested higher-order types ... ok (6ms)
+running 9 tests from file:///Users/bede/Code/monadeno/Option.test.ts
+test Processing an Optional type works as expected ... ok (8ms)
+test Can use explicit typeclass by importing OptionalFunctor ... ok (8ms)
+test Can define and use a semigroup over Optional types ... ok (7ms)
+test Can define semigroups over nested higher-order types ... ok (7ms)
+test Monadic 'unit' should work for Optional ... ok (8ms)
+test Monadic 'bind' should work in the Some case ... ok (8ms)
+test Monadic 'bind' should work in the None case ... ok (7ms)
+test Underlying Optional type should have chainable `bind` method which works in the Some case. ... ok (8ms)
+test Underlying Optional type should have `bind` method which works in the None case. ... ok (7ms)
 
-test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (53ms)
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (108ms)
 ```
