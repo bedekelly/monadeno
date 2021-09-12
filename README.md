@@ -12,19 +12,24 @@ fixing various problems that arose using Deno and strict tsconfig options.
 5. TypeNameToType causes a linting error for an empty interface, but this ignores the possibility of [declaration-merging/module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
 
 ## Running Tests
+
 Run `deno test` in the directory; each file ending in `*.test.ts` will be automatically found and executed.
+
 ```
 $ deno test
 running 9 tests from file:///Users/bede/Code/monadeno/Option.test.ts
-test Processing an Optional type works as expected ... ok (8ms)
-test Can use explicit typeclass by importing OptionalFunctor ... ok (8ms)
-test Can define and use a semigroup over Optional types ... ok (7ms)
+test Processing an Optional type works as expected ... ok (7ms)
+test Can use explicit typeclass by importing OptionalFunctor ... ok (7ms)
+test Can define and use a semigroup over Optional types ... ok (6ms)
 test Can define semigroups over nested higher-order types ... ok (7ms)
-test Monadic 'unit' should work for Optional ... ok (8ms)
-test Monadic 'bind' should work in the Some case ... ok (8ms)
-test Monadic 'bind' should work in the None case ... ok (7ms)
-test Underlying Optional type should have chainable `bind` method which works in the Some case. ... ok (8ms)
-test Underlying Optional type should have `bind` method which works in the None case. ... ok (7ms)
+test Monadic 'unit' should work for Optional ... ok (6ms)
+test Monadic 'bind' should work in the Some case ... ok (7ms)
+test Monadic 'bind' should work in the None case ... ok (6ms)
+test Underlying Optional type should have chainable `bind` method which works in the Some case. ... ok (7ms)
+test Underlying Optional type should have `bind` method which works in the None case. ... ok (6ms)
+running 2 tests from file:///Users/bede/Code/monadeno/Promise.test.ts
+test Promises have a unit operator ... ok (7ms)
+test Promises have a bind operator ... ok (6ms)
 
-test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (108ms)
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (126ms)
 ```

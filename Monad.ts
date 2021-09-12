@@ -7,7 +7,7 @@ import { Monoid } from "./Monoid.ts";
 export interface Monad<M extends TypeConstructor1, T>
   extends Monoid<GetType1<M, T>> {
   unit(t: T): GetType1<M, T>;
-  bind<A, B>(
+  bind<A extends T, B>(
     ma: GetType1<M, A>,
     f: (input: A) => GetType1<M, B>
   ): GetType1<M, B>;
